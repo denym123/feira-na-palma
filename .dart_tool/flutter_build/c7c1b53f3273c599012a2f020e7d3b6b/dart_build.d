@@ -1,0 +1,1 @@
+ /Users/denym/feira-na-palma/.dart_tool/flutter_build/c7c1b53f3273c599012a2f020e7d3b6b/dart_build_result.json: 

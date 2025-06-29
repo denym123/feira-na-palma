@@ -8,6 +8,12 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "auto_injector",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/auto_injector-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/boolean_selector-2.1.2",
       "packageUri": "lib/",
@@ -32,16 +38,28 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "cupertino_icons",
-      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.8",
+      "name": "crypto",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/crypto-3.0.6",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "easy_mask",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/easy_mask-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "fake_async",
       "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/fake_async-1.3.3",
       "packageUri": "lib/",
       "languageVersion": "3.3"
+    },
+    {
+      "name": "fixnum",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/fixnum-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
     },
     {
       "name": "flutter",
@@ -56,10 +74,28 @@
       "languageVersion": "3.5"
     },
     {
+      "name": "flutter_modular",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/flutter_modular-6.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.6"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///Users/denym/fvm/versions/3.32.3/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.7"
+    },
+    {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///Users/denym/fvm/versions/3.32.3/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "3.7"
+    },
+    {
+      "name": "intl",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/intl-0.20.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "leak_tracker",
@@ -86,6 +122,12 @@
       "languageVersion": "3.6"
     },
     {
+      "name": "loading_animation_widget",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/loading_animation_widget-1.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/matcher-0.12.17",
       "packageUri": "lib/",
@@ -104,10 +146,52 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "modular_core",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/modular_core-3.4.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.6"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/path-1.9.1",
       "packageUri": "lib/",
       "languageVersion": "3.4"
+    },
+    {
+      "name": "preact_signals",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/preact_signals-1.8.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "result_dart",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/result_dart-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "shimmer",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/shimmer-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "signals",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/signals-6.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "signals_core",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/signals_core-6.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "signals_flutter",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/signals_flutter-6.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "sky_engine",
@@ -120,6 +204,12 @@
       "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/source_span-1.10.1",
       "packageUri": "lib/",
       "languageVersion": "3.1"
+    },
+    {
+      "name": "sprintf",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/sprintf-7.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "stack_trace",
@@ -150,6 +240,18 @@
       "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/test_api-0.7.4",
       "packageUri": "lib/",
       "languageVersion": "3.5"
+    },
+    {
+      "name": "typed_data",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/typed_data-1.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
+      "name": "uuid",
+      "rootUri": "file:///Users/denym/.pub-cache/hosted/pub.dev/uuid-4.5.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "vector_math",
