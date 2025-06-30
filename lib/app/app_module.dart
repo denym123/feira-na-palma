@@ -1,4 +1,5 @@
 import 'package:feira_na_palma/global_modules/navigation_manager/navigation_manager_module.dart';
+import 'package:feira_na_palma/modules/producer_detail/producer_detail_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../core/constants/route.dart';
@@ -13,5 +14,7 @@ class AppModule extends Module {
   void routes(RouteManager r) {
     r.module(Routes.splash, module: SplashModule());
     r.module(Routes.navigationManager, module: NavigationManagerModule());
+    r.module(Routes.productDetail, module: ProductDetailModule());
+    r.module(Routes.producerDetail, module: ProducerDetailModule());
   }
 }
