@@ -17,6 +17,6 @@ class SplashController with ControllerLifeCycle, SplashVariables {
 
   Future<void> appInit() async {
     await Future.delayed(const Duration(seconds: 2));
-    Modular.to.pushNamed(Routes.navigationManager);
+    Modular.to.pushNamed(Routes.home);
   }
 }
