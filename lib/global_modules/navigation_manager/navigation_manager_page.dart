@@ -42,11 +42,11 @@ class _NavigationManagerPageState
           items: [
             BottomNavigationBarItem(
               icon: const Icon(Icons.home),
-              label: 'Home',
+              label: 'Início',
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.shopping_cart),
-              label: 'Cart',
+              label: 'Carrinho',
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.person),
@@ -54,7 +54,7 @@ class _NavigationManagerPageState
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.help),
-              label: 'Help',
+              label: 'Ajuda',
             ),
           ],
         ),
