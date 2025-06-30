@@ -1,3 +1,4 @@
+import 'package:feira_na_palma/global_modules/navigation_manager/navigation_manager_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../core/constants/route.dart';
@@ -11,5 +12,6 @@ class AppModule extends Module {
   @override
   void routes(RouteManager r) {
     r.module(Routes.splash, module: SplashModule());
+    r.module(Routes.navigationManager, module: NavigationManagerModule());
   }
 }
