@@ -1,5 +1,6 @@
 import 'package:feira_na_palma/global_modules/user_cart/controllers/user_cart_controller.dart';
 import 'package:feira_na_palma/modules/producer_detail/controllers/producer_detail_controller.dart';
+import 'package:feira_na_palma/modules/product_detail/widgets/different_producer_modal.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/core.dart';
@@ -26,20 +27,40 @@ class ProductDetailController with ControllerLifeCycle, ProductDetailVariables {
     getProduct();
   }
 
-  void submitCart() {
+  void submitCart() async {
     final newProductId = productId;
     final newAmount = amount.value;
+    final newProducerId = producer.id;
+
+    final cart = userStore.globalCart.value;
+
+    // Se o carrinho já contém produtos
+    if (cart.isNotEmpty) {
+      final existingProducerId = cart.first.producerId;
+
+      if (existingProducerId != newProducerId) {
+        var shouldCleanCart = await DifferentProducerModal()
+            .showDifferentProducerModal();
+        if (shouldCleanCart) {
+          userStore.globalCart.value.clear();
+          _producerDetailController.updateCartAmount();
+          submitCart();
+          return;
+        }
+        return;
+      }
+    }
 
     // Verifica se o item já existe no carrinho
-    final existingItemIndex = userStore.globalCart.value.indexWhere(
+    final existingItemIndex = cart.indexWhere(
       (item) => item.productId == newProductId,
     );
 
     if (existingItemIndex != -1) {
-      // Item já existe, aumenta o amount
-      final existingItem = userStore.globalCart.value[existingItemIndex];
+      // ✅ Item já existe, atualiza a quantidade
+      final existingItem = cart[existingItemIndex];
 
-      userStore.globalCart.value[existingItemIndex] = CartItem(
+      cart[existingItemIndex] = CartItem(
         productName: existingItem.productName,
         productId: existingItem.productId,
         producerId: existingItem.producerId,
@@ -48,8 +69,8 @@ class ProductDetailController with ControllerLifeCycle, ProductDetailVariables {
         price: productAS.value.value!.price,
       );
     } else {
-      // Item ainda não existe, adiciona normalmente
-      userStore.globalCart.value.add(
+      // ✅ Item novo, adiciona
+      cart.add(
         CartItem(
           productName: productAS.value.value?.name ?? "",
           productId: productId,

@@ -25,6 +25,12 @@ class _CartPageState extends PageLifeCycleState<CartController, CartPage> {
             children: [
               Text("Carrinho", style: context.textTheme.titleLarge),
               SizedBox(height: 24),
+              IconButton(
+                onPressed: () {
+                  controller.clearCart();
+                },
+                icon: Icon(Icons.shopping_cart),
+              ),
               Watch((context) {
                 return Expanded(
                   child: ListView.builder(

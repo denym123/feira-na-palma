@@ -10,4 +10,8 @@ class CartController with ControllerLifeCycle, CartVariables {
 
   CartController({required CartRepository cartRepository})
     : _cartRepository = cartRepository;
+
+  void clearCart() {
+    userCartStore.globalCart.value.clear();
+  }
 }
