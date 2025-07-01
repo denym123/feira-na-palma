@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feira_na_palma/core/extensions/theme.dart';
+import 'package:feira_na_palma/core/ui/widgets/filter_skeleton.dart';
+import 'package:feira_na_palma/core/ui/widgets/product_skeleton_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shimmer/shimmer.dart';
@@ -35,6 +37,7 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
             ),
             Watch((context) {
               return SignalFutureBuilder(
+                loadingWidget: const FilterSkeleton(),
                 asyncState: controller.filtersAS.value,
                 builder: (data) {
                   return SizedBox(
@@ -92,11 +95,12 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
               );
             }),
             Watch((context) {
-              return SignalFutureBuilder(
-                asyncState: controller.searchAS.value,
-                builder: (data) {
-                  return Expanded(
-                    child: GridView.builder(
+              return Expanded(
+                child: SignalFutureBuilder(
+                  loadingWidget: const ProductSkeletonGrid(),
+                  asyncState: controller.searchAS.value,
+                  builder: (data) {
+                    return GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         mainAxisExtent: 350,
                         crossAxisCount: 2,
@@ -183,9 +187,9 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                           ),
                         );
                       },
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               );
             }),
           ],

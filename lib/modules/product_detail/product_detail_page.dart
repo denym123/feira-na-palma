@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feira_na_palma/core/extensions/theme.dart';
 import 'package:feira_na_palma/modules/producers/models/producer.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:signals/signals_flutter.dart';
 
 import '../../core/core.dart';
@@ -35,165 +36,183 @@ class _ProductDetailPageState
       body: SafeArea(
         bottom: false,
         child: Watch((context) {
-          return SingleChildScrollView(
-            child: SignalFutureBuilder(
-              asyncState: controller.productAS.value,
-              builder: (data) {
-                return Column(
-                  spacing: 16,
-                  children: [
-                    Row(
-                      spacing: 24,
-                      children: [
-                        BackButton(),
-                        Text(
-                          "Detalhe do produto",
-                          style: context.textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                    Divider(height: 0),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: CachedNetworkImage(
-                        height: 200,
-                        width: 200,
-                        imageUrl: data?.image ?? "",
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                spacing: 24,
+                children: [
+                  BackButton(),
+                  Text(
+                    "Detalhe do produto",
+                    style: context.textTheme.titleMedium,
+                  ),
+                ],
+              ),
+              SingleChildScrollView(
+                child: SignalFutureBuilder(
+                  loadingWidget: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 200.0),
+                      child: LoadingAnimationWidget.progressiveDots(
+                        size: 100,
+                        color: context.colorScheme.primary,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: context.backgroundColor,
+                  ),
+                  asyncState: controller.productAS.value,
+                  builder: (data) {
+                    return Column(
+                      spacing: 16,
+                      children: [
+                        ClipRRect(
                           borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: context.colorScheme.shadow.withValues(
-                                alpha: 0.1,
-                              ),
-                              blurRadius: 8,
-                              offset: const Offset(0, 0),
-                            ),
-                          ],
+                          child: CachedNetworkImage(
+                            height: 200,
+                            width: 200,
+                            imageUrl: data?.image ?? "",
+                          ),
                         ),
-                        child: Column(
-                          spacing: 12,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              data?.name ?? "",
-                              style: context.textTheme.titleLarge,
-                            ),
-                            Text(
-                              data?.description ?? "",
-                              style: context.textTheme.bodyMedium?.copyWith(
-                                color: context.colorScheme.inverseSurface
-                                    .withValues(alpha: 0.8),
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: context.primaryColor.withValues(
-                                      alpha: 0.2,
-                                    ),
-                                    borderRadius: BorderRadius.circular(20),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Container(
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: context.backgroundColor,
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: context.colorScheme.shadow.withValues(
+                                    alpha: 0.1,
                                   ),
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 4,
-                                    horizontal: 16,
-                                  ),
-                                  child: Text(
-                                    data?.productCategorySlug ?? "",
-                                    style: context.textTheme.titleSmall,
-                                  ),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 0),
                                 ),
                               ],
                             ),
-
-                            _buildProductDetail(
-                              "Produtor",
-                              widget.producer.name,
-                              context,
-                            ),
-                            _buildProductDetail(
-                              "Unidade",
-                              "Venda por ${data?.unit ?? ""}",
-                              context,
-                            ),
-                            Divider(),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            child: Column(
+                              spacing: 12,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Text(
+                                  data?.name ?? "",
+                                  style: context.textTheme.titleLarge,
+                                ),
+                                Text(
+                                  data?.description ?? "",
+                                  style: context.textTheme.bodyMedium?.copyWith(
+                                    color: context.colorScheme.inverseSurface
+                                        .withValues(alpha: 0.8),
+                                  ),
+                                ),
+                                Row(
                                   children: [
-                                    Text(
-                                      data?.price.toBRL() ?? "",
-                                      style: context.textTheme.titleLarge
-                                          ?.copyWith(
-                                            color: context.colorScheme.primary,
-                                          ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: context.primaryColor.withValues(
+                                          alpha: 0.2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 4,
+                                        horizontal: 16,
+                                      ),
+                                      child: Text(
+                                        data?.productCategorySlug ?? "",
+                                        style: context.textTheme.titleSmall,
+                                      ),
                                     ),
-                                    Text("por ${data?.unit ?? ""}"),
                                   ],
                                 ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    color: context.colorScheme.onInverseSurface,
-                                  ),
+
+                                _buildProductDetail(
+                                  "Produtor",
+                                  widget.producer.name,
+                                  context,
+                                ),
+                                _buildProductDetail(
+                                  "Unidade",
+                                  "Venda por ${data?.unit ?? ""}",
+                                  context,
+                                ),
+                                Divider(),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          data?.price.toBRL() ?? "",
+                                          style: context.textTheme.titleLarge
+                                              ?.copyWith(
+                                                color:
+                                                    context.colorScheme.primary,
+                                              ),
+                                        ),
+                                        Text("por ${data?.unit ?? ""}"),
+                                      ],
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: context
+                                            .colorScheme
+                                            .onInverseSurface,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                            icon: Icon(Icons.remove),
+                                            onPressed: () {
+                                              if (controller.amount.value > 1) {
+                                                controller.amount.value--;
+                                              }
+                                            },
+                                          ),
+                                          Watch((context) {
+                                            return Text("${controller.amount}");
+                                          }),
+                                          IconButton(
+                                            icon: Icon(Icons.add),
+                                            onPressed: () {
+                                              controller.amount.value++;
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                FilledButton(
+                                  onPressed: () {
+                                    controller.submitCart();
+                                  },
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      IconButton(
-                                        icon: Icon(Icons.remove),
-                                        onPressed: () {
-                                          if (controller.amount.value > 1) {
-                                            controller.amount.value--;
-                                          }
-                                        },
-                                      ),
+                                      Icon(Icons.shopping_cart),
                                       Watch((context) {
-                                        return Text("${controller.amount}");
+                                        return Text(
+                                          "Adicionar ao carrinho - ${(controller.amount.value * data!.price).toBRL()} R\$",
+                                        );
                                       }),
-                                      IconButton(
-                                        icon: Icon(Icons.add),
-                                        onPressed: () {
-                                          controller.amount.value++;
-                                        },
-                                      ),
                                     ],
                                   ),
                                 ),
                               ],
                             ),
-                            FilledButton(
-                              onPressed: () {
-                                controller.submitCart();
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.shopping_cart),
-                                  Watch((context) {
-                                    return Text(
-                                      "Adicionar ao carrinho - ${(controller.amount.value * data!.price).toBRL()} R\$",
-                                    );
-                                  }),
-                                ],
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
           );
         }),
       ),
