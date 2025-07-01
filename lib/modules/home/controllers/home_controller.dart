@@ -13,6 +13,15 @@ class HomeController with ControllerLifeCycle, HomeVariables {
     getSearchProducts();
   }
 
+  void setSelectedFilter(Filter? filter) {
+    if (filter?.slug == selectedFilter.value?.slug) {
+      selectedFilter.value = null;
+    } else {
+      selectedFilter.value = filter;
+    }
+    getSearchProducts();
+  }
+
   Future<void> search() async {
     debouncer.run(() {
       getSearchProducts();
@@ -31,6 +40,7 @@ class HomeController with ControllerLifeCycle, HomeVariables {
       future: searchAS,
       repositoryFunction: _homeRepository.getSearchProducts(
         searchController.text,
+        selectedFilter.value?.id,
       ),
     ).call();
   }

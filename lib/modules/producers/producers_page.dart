@@ -5,7 +5,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:signals/signals_flutter.dart';
 
 import '../../core/core.dart';
-import 'producers.dart';
 
 class ProducersPage extends StatefulWidget {
   const ProducersPage({super.key});
@@ -29,7 +28,9 @@ class _ProducersPageState
               Text("Produtores", style: context.textTheme.titleLarge),
               SearchInputField(
                 controller: controller.searchController,
-                onChanged: (value) {},
+                onChanged: (_) {
+                  controller.search();
+                },
               ),
               Watch((context) {
                 return SignalFutureBuilder(
@@ -65,7 +66,17 @@ class _ProducersPageState
                                 children: [
                                   Text(
                                     producer?.name ?? "",
-                                    style: context.textTheme.titleSmall,
+                                    style: context.textTheme.titleMedium,
+                                  ),
+                                  Text(
+                                    producer?.description ?? "",
+                                    style: context.textTheme.bodyMedium
+                                        ?.copyWith(
+                                          color: context
+                                              .colorScheme
+                                              .inverseSurface
+                                              .withValues(alpha: 0.5),
+                                        ),
                                   ),
                                   Row(
                                     children: [
@@ -73,15 +84,17 @@ class _ProducersPageState
                                         Icons.pin_drop_outlined,
                                         color: context.colorScheme.primary,
                                       ),
-                                      Text(
-                                        producer?.address ?? "",
-                                        style: context.textTheme.titleSmall
-                                            ?.copyWith(
-                                              color: context
-                                                  .colorScheme
-                                                  .inverseSurface
-                                                  .withValues(alpha: 0.5),
-                                            ),
+                                      Expanded(
+                                        child: Text(
+                                          producer?.address ?? "",
+                                          style: context.textTheme.titleSmall
+                                              ?.copyWith(
+                                                color: context
+                                                    .colorScheme
+                                                    .inverseSurface
+                                                    .withValues(alpha: 0.5),
+                                              ),
+                                        ),
                                       ),
                                     ],
                                   ),

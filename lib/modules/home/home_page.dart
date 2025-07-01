@@ -50,7 +50,7 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                           return InkWell(
                             borderRadius: BorderRadius.circular(20),
                             onTap: () {
-                              controller.selectedFilter.value = filter?.slug;
+                              controller.setSelectedFilter(filter);
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(
@@ -60,7 +60,7 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color:
-                                    controller.selectedFilter.value ==
+                                    controller.selectedFilter.value?.slug ==
                                         filter?.slug
                                     ? context.primaryColor
                                     : Colors.transparent,
@@ -75,7 +75,7 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                                 style: context.textTheme.titleLarge?.copyWith(
                                   fontSize: 12,
                                   color:
-                                      controller.selectedFilter.value ==
+                                      controller.selectedFilter.value?.slug ==
                                           filter?.slug
                                       ? Colors.white
                                       : context.textTheme.titleLarge?.color,

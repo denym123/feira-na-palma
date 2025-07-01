@@ -102,7 +102,7 @@ class SearchInputField extends StatelessWidget {
   }
 
   OutlineInputBorder get _defaultBorder => OutlineInputBorder(
-    borderRadius: BorderRadius.circular(8),
+    borderRadius: BorderRadius.circular(20),
     borderSide: BorderSide(color: Colors.grey, width: 1),
   );
 }

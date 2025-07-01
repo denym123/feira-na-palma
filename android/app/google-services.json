@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "600043534842",
+    "firebase_url": "https://feira-na-palma-default-rtdb.firebaseio.com",
+    "project_id": "feira-na-palma",
+    "storage_bucket": "feira-na-palma.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600043534842:android:61a64580cab57b671c0c43",
+        "android_client_info": {
+          "package_name": "com.example.feira_na_palma2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhocjRbqOnOKImwuENmn9rilBkpXTwJLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

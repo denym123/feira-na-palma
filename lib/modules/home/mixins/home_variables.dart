@@ -8,7 +8,7 @@ mixin HomeVariables {
   TextEditingController searchController = TextEditingController();
   Debouncer debouncer = Debouncer(milliseconds: 500);
 
-  Signal<String?> selectedFilter = Signal(null);
+  Signal<Filter?> selectedFilter = Signal(null);
 
   AsyncSignal<List<Product>?> searchAS = AsyncSignal(AsyncLoading());
   AsyncSignal<List<Filter>?> filtersAS = AsyncSignal(AsyncLoading());

@@ -12,6 +12,7 @@ void main() async {
       FlutterError.onError = (FlutterErrorDetails details) {
         ExceptionHandler(details.exception, details.stack);
       };
+      await ApplicationConfig().configureApp();
       runApp(ModularApp(module: AppModule(), child: const AppWidget()));
     },
     (error, stack) {
