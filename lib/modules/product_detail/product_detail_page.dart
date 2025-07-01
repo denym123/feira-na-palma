@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feira_na_palma/core/extensions/theme.dart';
+import 'package:feira_na_palma/modules/producers/models/producer.dart';
 import 'package:flutter/material.dart';
 import 'package:signals/signals_flutter.dart';
 
@@ -7,9 +8,14 @@ import '../../core/core.dart';
 import 'product_detail.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  final String? productId;
+  final String productId;
+  final Producer producer;
 
-  const ProductDetailPage({super.key, required this.productId});
+  const ProductDetailPage({
+    super.key,
+    required this.productId,
+    required this.producer,
+  });
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -18,7 +24,10 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState
     extends PageLifeCycleState<ProductDetailController, ProductDetailPage> {
   @override
-  Map<String, dynamic>? get params => {'product_id': widget.productId};
+  Map<String, dynamic>? get params => {
+    'product_id': widget.productId,
+    'producer': widget.producer,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -104,19 +113,15 @@ class _ProductDetailPageState
                                 ),
                               ],
                             ),
+
                             _buildProductDetail(
                               "Produtor",
-                              "Nome do Produtor",
+                              widget.producer.name,
                               context,
                             ),
                             _buildProductDetail(
-                              "Produtor",
-                              "Nome do Produtor",
-                              context,
-                            ),
-                            _buildProductDetail(
-                              "Produtor",
-                              "Nome do Produtor",
+                              "Unidade",
+                              "Venda por ${data?.unit ?? ""}",
                               context,
                             ),
                             Divider(),
@@ -145,12 +150,20 @@ class _ProductDetailPageState
                                     children: [
                                       IconButton(
                                         icon: Icon(Icons.remove),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          if (controller.amount.value > 1) {
+                                            controller.amount.value--;
+                                          }
+                                        },
                                       ),
-                                      Text("1"),
+                                      Watch((context) {
+                                        return Text("${controller.amount}");
+                                      }),
                                       IconButton(
                                         icon: Icon(Icons.add),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          controller.amount.value++;
+                                        },
                                       ),
                                     ],
                                   ),
@@ -163,7 +176,11 @@ class _ProductDetailPageState
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(Icons.shopping_cart),
-                                  Text("Adicionar ao carrinho - 3.50 R\$"),
+                                  Watch((context) {
+                                    return Text(
+                                      "Adicionar ao carrinho - ${(controller.amount.value * data!.price).toBRL()} R\$",
+                                    );
+                                  }),
                                 ],
                               ),
                             ),

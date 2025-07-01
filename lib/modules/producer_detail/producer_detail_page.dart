@@ -175,7 +175,10 @@ class _ProducerDetailPageState
                           onTap: () {
                             Modular.to.pushNamed(
                               Routes.productDetail,
-                              arguments: product!.id,
+                              arguments: {
+                                'product_id': product!.id,
+                                'producer': controller.producerAS.value.value,
+                              },
                             );
                           },
                           child: Container(

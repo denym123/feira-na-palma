@@ -12,7 +12,10 @@ class ProductDetailModule extends Module {
   void routes(r) {
     r.child(
       Modular.initialRoute,
-      child: (context) => ProductDetailPage(productId: r.args.data),
+      child: (context) => ProductDetailPage(
+        productId: r.args.data['product_id'],
+        producer: r.args.data['producer'],
+      ),
     );
   }
 }
