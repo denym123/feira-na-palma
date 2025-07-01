@@ -1,6 +1,5 @@
 import 'package:feira_na_palma/core/extensions/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:signals/signals_flutter.dart';
 
 import '../../core/core.dart';
@@ -21,19 +20,29 @@ class _CartPageState extends PageLifeCycleState<CartController, CartPage> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
           child: Column(
+            spacing: 16,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("Carrinho", style: context.textTheme.titleLarge),
-              SizedBox(height: 24),
-              IconButton(
-                onPressed: () {
-                  controller.clearCart();
-                },
-                icon: Icon(Icons.shopping_cart),
+              Row(
+                spacing: 24,
+                children: [
+                  Text("Limpar Carrinho", style: context.textTheme.titleMedium),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        controller.clearCart();
+                      });
+                    },
+                    icon: Icon(Icons.delete),
+                  ),
+                ],
               ),
               Watch((context) {
                 return Expanded(
-                  child: ListView.builder(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
                     itemCount: controller.userCartStore.globalCart.value.length,
                     itemBuilder: (context, index) {
                       final item =
@@ -54,28 +63,53 @@ class _CartPageState extends PageLifeCycleState<CartController, CartPage> {
                               width: 1,
                             ),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                item?.productName ?? "",
-                                style: context.textTheme.titleMedium,
-                              ),
-                              Text(
-                                item?.producerName ?? "",
-                                style: context.textTheme.bodyMedium?.copyWith(
-                                  color: context.colorScheme.inverseSurface
-                                      .withValues(alpha: 0.5),
-                                ),
-                              ),
-                              Text(item?.amount.toString() ?? ""),
-                              Row(
+                              Column(
+                                spacing: 8,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Icon(
-                                    Icons.pin_drop_outlined,
-                                    color: context.colorScheme.primary,
+                                  Text(
+                                    item.productName,
+                                    style: context.textTheme.titleMedium,
+                                  ),
+                                  Text(
+                                    item.producerName,
+                                    style: context.textTheme.bodyMedium
+                                        ?.copyWith(
+                                          color: context
+                                              .colorScheme
+                                              .inverseSurface
+                                              .withValues(alpha: 0.5),
+                                        ),
+                                  ),
+                                  Text(
+                                    "${item.price.toBRL()} por ${item.unit}",
+                                  ),
+                                  Text("Quantidade: ${item.amount}"),
+                                  Row(
+                                    spacing: 8,
+                                    children: [
+                                      Icon(
+                                        Icons.monetization_on,
+                                        color: context.colorScheme.primary,
+                                      ),
+                                      Text(
+                                        "Total: ${(item.amount * item.price).toBRL()}",
+                                      ),
+                                    ],
                                   ),
                                 ],
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    controller.userCartStore.globalCart.value
+                                        .removeAt(index);
+                                  });
+                                },
+                                icon: Icon(Icons.close),
                               ),
                             ],
                           ),
@@ -85,6 +119,47 @@ class _CartPageState extends PageLifeCycleState<CartController, CartPage> {
                   ),
                 );
               }),
+              Container(
+                padding: EdgeInsets.all(16),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: context.colorScheme.inverseSurface.withValues(
+                        alpha: 0.3,
+                      ),
+                      width: 1,
+                    ),
+                    right: BorderSide(
+                      color: context.colorScheme.inverseSurface.withValues(
+                        alpha: 0.3,
+                      ),
+                      width: 1,
+                    ),
+                    left: BorderSide(
+                      color: context.colorScheme.inverseSurface.withValues(
+                        alpha: 0.3,
+                      ),
+                      width: 1,
+                    ),
+                  ),
+                  color: context.backgroundColor,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Total: ${(controller.userCartStore.globalCart.value.fold<double>(0, (previousValue, element) => previousValue + element.amount * element.price)).toBRL()}",
+                      style: context.textTheme.titleMedium,
+                    ),
+                    FilledButton(
+                      onPressed: () {},
+                      child: Text("Enviar ao produtor"),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

@@ -61,6 +61,7 @@ class ProductDetailController with ControllerLifeCycle, ProductDetailVariables {
       final existingItem = cart[existingItemIndex];
 
       cart[existingItemIndex] = CartItem(
+        unit: existingItem.unit,
         productName: existingItem.productName,
         productId: existingItem.productId,
         producerId: existingItem.producerId,
@@ -72,6 +73,7 @@ class ProductDetailController with ControllerLifeCycle, ProductDetailVariables {
       // ✅ Item novo, adiciona
       cart.add(
         CartItem(
+          unit: productAS.value.value?.unit ?? "",
           productName: productAS.value.value?.name ?? "",
           productId: productId,
           producerId: producer.id,

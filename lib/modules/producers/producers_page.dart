@@ -65,6 +65,7 @@ class _ProducersPageState
                                 ),
                               ),
                               child: Column(
+                                spacing: 8,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -73,6 +74,7 @@ class _ProducersPageState
                                   ),
                                   Text(
                                     producer?.description ?? "",
+                                    maxLines: 2,
                                     style: context.textTheme.bodyMedium
                                         ?.copyWith(
                                           color: context

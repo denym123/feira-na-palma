@@ -6,12 +6,17 @@ import '../cart.dart';
 
 class CartController with ControllerLifeCycle, CartVariables {
   final UserCartStore userCartStore = Modular.get<UserCartStore>();
+
   final CartRepository _cartRepository;
 
   CartController({required CartRepository cartRepository})
     : _cartRepository = cartRepository;
 
-  void clearCart() {
+  Future<void> clearCart() async {
     userCartStore.globalCart.value.clear();
+  }
+
+  Future<void> clearItem(CartItem item) async {
+    userCartStore.globalCart.value.remove(item);
   }
 }
