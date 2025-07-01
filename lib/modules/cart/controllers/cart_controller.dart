@@ -5,7 +5,7 @@ import '../../../core/core.dart';
 import '../cart.dart';
 
 class CartController with ControllerLifeCycle, CartVariables {
-  final UserCartStore _userCartStore = Modular.get<UserCartStore>();
+  final UserCartStore userCartStore = Modular.get<UserCartStore>();
   final CartRepository _cartRepository;
 
   CartController({required CartRepository cartRepository})

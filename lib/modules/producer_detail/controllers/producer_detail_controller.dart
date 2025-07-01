@@ -24,14 +24,10 @@ class ProducerDetailController
 
   @override
   void onReady() {
-    getCartAmount();
+    updateCartAmount();
     getProducer();
     getFilters();
     getSearchProducts();
-  }
-
-  void getCartAmount() {
-    cartAmount.value = userCartStore.globalCart.value.length;
   }
 
   void updateCartAmount() {

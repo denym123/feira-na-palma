@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feira_na_palma/core/extensions/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -97,7 +98,7 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                   return Expanded(
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisExtent: 310,
+                        mainAxisExtent: 350,
                         crossAxisCount: 2,
                         mainAxisSpacing: 16,
                         crossAxisSpacing: 16,
@@ -126,6 +127,8 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   ClipRRect(
@@ -157,13 +160,11 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                                           ),
                                     ),
                                   ),
-                                  SizedBox(height: 4),
                                   Text(
                                     product?.name ?? "",
-                                    style: context.textTheme.bodyLarge,
+                                    style: context.textTheme.titleSmall,
                                   ),
                                   Text("por ${product?.unit}"),
-                                  SizedBox(height: 4),
                                   Text(
                                     product?.price.toBRL() ?? "",
                                     style: context.textTheme.titleSmall
@@ -172,7 +173,6 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                                           fontWeight: FontWeight.bold,
                                         ),
                                   ),
-                                  const SizedBox(height: 4),
                                   FilledButton(
                                     onPressed: () {},
                                     child: Text("Adicionar"),

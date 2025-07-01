@@ -70,7 +70,6 @@ class _ProducerDetailPageState
                               Icons.pin_drop,
                               color: AppColors.i.primaryColor,
                             ),
-                            SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 data?.address ?? "",
@@ -89,7 +88,6 @@ class _ProducerDetailPageState
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.phone, color: AppColors.i.primaryColor),
-                            SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 data?.phone ?? "",
@@ -178,7 +176,7 @@ class _ProducerDetailPageState
                     child: GridView.builder(
                       padding: EdgeInsets.all(16),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisExtent: 310,
+                        mainAxisExtent: 330,
                         crossAxisCount: 2,
                         mainAxisSpacing: 16,
                         crossAxisSpacing: 16,
@@ -210,6 +208,8 @@ class _ProducerDetailPageState
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   ClipRRect(

@@ -4,7 +4,7 @@ class CartItem {
   final String producerId;
   final String producerName;
   final int amount;
-  final String price;
+  final int price;
 
   CartItem({
     required this.productName,

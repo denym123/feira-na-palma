@@ -27,7 +27,6 @@ class ProductDetailController with ControllerLifeCycle, ProductDetailVariables {
   }
 
   void submitCart() {
-    final newPrice = productAS.value.value!.price * amount.value;
     final newProductId = productId;
     final newAmount = amount.value;
 
@@ -46,9 +45,7 @@ class ProductDetailController with ControllerLifeCycle, ProductDetailVariables {
         producerId: existingItem.producerId,
         producerName: existingItem.producerName,
         amount: existingItem.amount + newAmount,
-        price:
-            ((productAS.value.value!.price) * (existingItem.amount + newAmount))
-                .toBRL(),
+        price: productAS.value.value!.price,
       );
     } else {
       // Item ainda não existe, adiciona normalmente
@@ -59,12 +56,13 @@ class ProductDetailController with ControllerLifeCycle, ProductDetailVariables {
           producerId: producer.id,
           producerName: producer.name,
           amount: amount.value,
-          price: newPrice.toBRL(),
+          price: productAS.value.value!.price,
         ),
       );
     }
 
     _producerDetailController.updateCartAmount();
+    Modular.to.pop();
   }
 
   Future<void> getProduct() async {
