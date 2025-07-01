@@ -2,7 +2,7 @@ class Product {
   final String id;
   final String name;
   final String image;
-  final String price;
+  final int price;
   final String unit;
   final String producerId;
   final String description;
@@ -26,7 +26,7 @@ class Product {
       id: id,
       name: json["name"],
       image: json["img"],
-      price: json["price"].toString(),
+      price: json["price"],
       unit: json["unit"],
       producerId: json["produtor_id"].id,
       description: json["description"],

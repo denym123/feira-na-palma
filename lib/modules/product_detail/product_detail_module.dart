@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'product_detail.dart';
 
- class ProductDetailModule extends Module {
+class ProductDetailModule extends Module {
   @override
   void binds(i) {
     i.addLazySingleton(ProductDetailController.new);
@@ -12,7 +12,7 @@ import 'product_detail.dart';
   void routes(r) {
     r.child(
       Modular.initialRoute,
-      child: (context) => const ProductDetailPage()
+      child: (context) => ProductDetailPage(productId: r.args.data),
     );
   }
 }

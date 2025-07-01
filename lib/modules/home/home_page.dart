@@ -165,7 +165,7 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                                   Text("por ${product?.unit}"),
                                   SizedBox(height: 4),
                                   Text(
-                                    product?.price ?? "",
+                                    product?.price.toBRL() ?? "",
                                     style: context.textTheme.titleSmall
                                         ?.copyWith(
                                           color: context.colorScheme.primary,

@@ -173,7 +173,10 @@ class _ProducerDetailPageState
                         return InkWell(
                           borderRadius: BorderRadius.circular(20),
                           onTap: () {
-                            Modular.to.pushNamed(Routes.productDetail);
+                            Modular.to.pushNamed(
+                              Routes.productDetail,
+                              arguments: product!.id,
+                            );
                           },
                           child: Container(
                             alignment: Alignment.center,
@@ -227,7 +230,7 @@ class _ProducerDetailPageState
                                   Text("por ${product?.unit}"),
                                   SizedBox(height: 4),
                                   Text(
-                                    product?.price ?? "",
+                                    product?.price.toBRL() ?? "",
                                     style: context.textTheme.titleSmall
                                         ?.copyWith(
                                           color: context.colorScheme.primary,
