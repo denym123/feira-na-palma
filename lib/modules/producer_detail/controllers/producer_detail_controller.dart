@@ -1,10 +1,13 @@
+import 'package:feira_na_palma/global_modules/user_cart/controllers/user_cart_controller.dart';
 import 'package:feira_na_palma/modules/home/models/filter.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../core/core.dart';
 import '../producer_detail.dart';
 
 class ProducerDetailController
     with ControllerLifeCycle, ProducerDetailVariables {
+  final UserCartStore userCartStore = Modular.get<UserCartStore>();
   final ProducerDetailRepository _producerDetailRepository;
 
   ProducerDetailController({

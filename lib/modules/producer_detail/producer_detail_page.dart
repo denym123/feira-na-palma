@@ -29,7 +29,23 @@ class _ProducerDetailPageState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BackButton(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BackButton(),
+                Watch((context) {
+                  return IconButton(
+                    onPressed: () {},
+                    icon: Badge(
+                      label: Text(
+                        "${controller.userCartStore.globalCart.value.length}",
+                      ),
+                      child: Icon(Icons.shopping_cart_checkout_outlined),
+                    ),
+                  );
+                }),
+              ],
+            ),
             Watch((context) {
               return SignalFutureBuilder(
                 asyncState: controller.producerAS.value,
