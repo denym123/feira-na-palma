@@ -9,7 +9,9 @@ import '../../core/core.dart';
 import 'producer_detail.dart';
 
 class ProducerDetailPage extends StatefulWidget {
-  const ProducerDetailPage({super.key});
+  final String? producerId;
+
+  const ProducerDetailPage({super.key, required this.producerId});
 
   @override
   State<ProducerDetailPage> createState() => _ProducerDetailPageState();
@@ -18,6 +20,9 @@ class ProducerDetailPage extends StatefulWidget {
 class _ProducerDetailPageState
     extends PageLifeCycleState<ProducerDetailController, ProducerDetailPage> {
   @override
+  Map<String, dynamic>? get params => {'producer_id': widget.producerId};
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
@@ -25,21 +30,64 @@ class _ProducerDetailPageState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BackButton(),
-            Center(child: Text("Nome", style: context.textTheme.titleMedium)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.star, color: AppColors.i.warningColor),
-                Text(
-                  "4.5",
-                  style: context.textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(width: 8),
-                Text("Nome", style: context.textTheme.bodyLarge),
-              ],
-            ),
+            Watch((context) {
+              return SignalFutureBuilder(
+                asyncState: controller.producerAS.value,
+                builder: (data) {
+                  return Column(
+                    children: [
+                      Center(
+                        child: Text(
+                          data?.name ?? "",
+                          style: context.textTheme.titleLarge,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8.0,
+                          horizontal: 16,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.pin_drop,
+                              color: AppColors.i.primaryColor,
+                            ),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                data?.address ?? "",
+                                style: context.textTheme.bodyLarge,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8.0,
+                          horizontal: 16,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.phone, color: AppColors.i.primaryColor),
+                            SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                data?.phone ?? "",
+                                style: context.textTheme.bodyLarge,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }),
             Divider(),
             Watch((context) {
               return Padding(
@@ -64,7 +112,7 @@ class _ProducerDetailPageState
                             return InkWell(
                               borderRadius: BorderRadius.circular(20),
                               onTap: () {
-                                controller.selectedFilter.value = filter?.slug;
+                                controller.setSelectedFilter(filter);
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
@@ -74,7 +122,7 @@ class _ProducerDetailPageState
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   color:
-                                      controller.selectedFilter.value ==
+                                      controller.selectedFilter.value?.slug ==
                                           filter?.slug
                                       ? context.primaryColor
                                       : Colors.transparent,
@@ -89,7 +137,7 @@ class _ProducerDetailPageState
                                   style: context.textTheme.titleLarge?.copyWith(
                                     fontSize: 12,
                                     color:
-                                        controller.selectedFilter.value ==
+                                        controller.selectedFilter.value?.slug ==
                                             filter?.slug
                                         ? Colors.white
                                         : context.textTheme.titleLarge?.color,

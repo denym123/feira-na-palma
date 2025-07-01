@@ -4,7 +4,7 @@ class Product {
   final String image;
   final String price;
   final String unit;
-  final String producerName;
+  final String producerId;
   final String description;
   final String categoryId;
   final String productCategorySlug;
@@ -15,7 +15,7 @@ class Product {
     required this.image,
     required this.price,
     required this.unit,
-    required this.producerName,
+    required this.producerId,
     required this.description,
     required this.categoryId,
     required this.productCategorySlug,
@@ -28,7 +28,7 @@ class Product {
       image: json["img"],
       price: json["price"].toString(),
       unit: json["unit"],
-      producerName: json["produtor_id"].id,
+      producerId: json["produtor_id"].id,
       description: json["description"],
       categoryId: json["category_id"].id,
       productCategorySlug: json["product_category_slug"],

@@ -46,7 +46,10 @@ class _ProducersPageState
                           return InkWell(
                             borderRadius: BorderRadius.circular(20),
                             onTap: () {
-                              Modular.to.pushNamed(Routes.producerDetail);
+                              Modular.to.pushNamed(
+                                Routes.producerDetail,
+                                arguments: producer!.id,
+                              );
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(

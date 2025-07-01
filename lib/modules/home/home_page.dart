@@ -108,7 +108,10 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
                         return InkWell(
                           borderRadius: BorderRadius.circular(20),
                           onTap: () {
-                            Modular.to.pushNamed(Routes.producerDetail);
+                            Modular.to.pushNamed(
+                              Routes.producerDetail,
+                              arguments: product!.producerId,
+                            );
                           },
                           child: Container(
                             alignment: Alignment.center,

@@ -1,5 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../core/core.dart';
 import 'producer_detail.dart';
 
 class ProducerDetailModule extends Module {
@@ -13,7 +12,7 @@ class ProducerDetailModule extends Module {
   void routes(r) {
     r.child(
       Modular.initialRoute,
-      child: (context) => const ProducerDetailPage(),
+      child: (context) => ProducerDetailPage(producerId: r.args.data),
     );
   }
 }
