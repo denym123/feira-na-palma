@@ -5,10 +5,12 @@ class CartItem {
   final String producerName;
   final int amount;
   final String unit;
+  final String producerPhone;
   final int price;
 
   CartItem({
     required this.unit,
+    required this.producerPhone,
     required this.productName,
     required this.productId,
     required this.producerId,

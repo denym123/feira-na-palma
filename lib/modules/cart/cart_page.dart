@@ -154,7 +154,11 @@ class _CartPageState extends PageLifeCycleState<CartController, CartPage> {
                       style: context.textTheme.titleMedium,
                     ),
                     FilledButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.sendWhatsAppOrderMessage(
+                          controller.userCartStore.globalCart.value,
+                        );
+                      },
                       child: Text("Enviar ao produtor"),
                     ),
                   ],
