@@ -13,6 +13,8 @@ mixin ProducerDetailVariables {
 
   Signal<Filter?> selectedFilter = Signal(null);
 
+  Signal<int> cartAmount = Signal<int>(0);
+
   AsyncSignal<Producer?> producerAS = AsyncSignal(AsyncLoading());
   AsyncSignal<List<Product>?> searchAS = AsyncSignal(AsyncLoading());
   AsyncSignal<List<Filter>?> filtersAS = AsyncSignal(AsyncLoading());

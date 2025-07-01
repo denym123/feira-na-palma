@@ -1,3 +1,4 @@
+import 'package:feira_na_palma/global_modules/navigation_manager/controllers/controllers.dart';
 import 'package:feira_na_palma/global_modules/user_cart/controllers/user_cart_controller.dart';
 import 'package:feira_na_palma/modules/home/models/filter.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,6 +8,8 @@ import '../producer_detail.dart';
 
 class ProducerDetailController
     with ControllerLifeCycle, ProducerDetailVariables {
+  final NavigationManagerController _navigationManagerController =
+      Modular.get<NavigationManagerController>();
   final UserCartStore userCartStore = Modular.get<UserCartStore>();
   final ProducerDetailRepository _producerDetailRepository;
 
@@ -21,9 +24,21 @@ class ProducerDetailController
 
   @override
   void onReady() {
+    getCartAmount();
     getProducer();
     getFilters();
     getSearchProducts();
+  }
+
+  void getCartAmount() {
+    cartAmount.value = userCartStore.globalCart.value.length;
+  }
+
+  void updateCartAmount() {
+    cartAmount.value = 0;
+    for (var element in userCartStore.globalCart.value) {
+      cartAmount.value = cartAmount.value + element.amount;
+    }
   }
 
   void setSelectedFilter(Filter? filter) {
@@ -63,5 +78,10 @@ class ProducerDetailController
         selectedFilter.value?.id,
       ),
     ).call();
+  }
+
+  void goToCart() {
+    _navigationManagerController.currentIndex.value = 1;
+    Modular.to.navigate(Routes.cart);
   }
 }

@@ -171,7 +171,9 @@ class _ProductDetailPageState
                               ],
                             ),
                             FilledButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                controller.submitCart();
+                              },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

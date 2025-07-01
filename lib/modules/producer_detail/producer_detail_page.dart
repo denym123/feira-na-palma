@@ -35,11 +35,11 @@ class _ProducerDetailPageState
                 BackButton(),
                 Watch((context) {
                   return IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.goToCart();
+                    },
                     icon: Badge(
-                      label: Text(
-                        "${controller.userCartStore.globalCart.value.length}",
-                      ),
+                      label: Text("${controller.cartAmount.value}"),
                       child: Icon(Icons.shopping_cart_checkout_outlined),
                     ),
                   );
