@@ -5,7 +5,7 @@ import '../core.dart';
 class UiConfig {
   UiConfig._();
 
-  static String get title => 'Portali App';
+  static String get title => 'Feira na Palma';
 
   static ThemeData get theme => ThemeData(
     fontFamily: 'Poppins',

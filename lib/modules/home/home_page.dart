@@ -23,7 +23,7 @@ class _HomePageState extends PageLifeCycleState<HomeController, HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
         child: Column(
           spacing: 16,
           crossAxisAlignment: CrossAxisAlignment.stretch,

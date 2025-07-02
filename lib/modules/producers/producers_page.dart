@@ -1,5 +1,6 @@
 import 'package:feira_na_palma/core/extensions/theme.dart';
 import 'package:feira_na_palma/modules/modules.dart';
+import 'package:feira_na_palma/modules/producers/widgets/producer_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:signals/signals_flutter.dart';
@@ -33,11 +34,12 @@ class _ProducersPageState
                 },
               ),
               Watch((context) {
-                return SignalFutureBuilder(
-                  asyncState: controller.searchAS.value,
-                  builder: (data) {
-                    return Expanded(
-                      child: ListView.separated(
+                return Expanded(
+                  child: SignalFutureBuilder(
+                    loadingWidget: const ProducerSkeleton(),
+                    asyncState: controller.searchAS.value,
+                    builder: (data) {
+                      return ListView.separated(
                         itemCount: data?.length ?? 0,
                         separatorBuilder: (context, index) =>
                             const SizedBox(height: 16),
@@ -108,9 +110,9 @@ class _ProducersPageState
                             ),
                           );
                         },
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 );
               }),
             ],
